@@ -1,0 +1,10 @@
+{
+	"name": "led",
+	"url": "https://github.com/RudenkoArts/led",
+	"license": "MIT",
+	"tags": ["level","editor","cross","led"],
+	"description": "level editor",
+	"version": "0.0.1",
+	"releasenote": "",
+	"contributors": ["RudenkoArts"]
+}

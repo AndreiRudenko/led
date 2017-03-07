@@ -9,5 +9,6 @@ package led.core;
 	var move:Int = 2;
 	var stamp:Int = 3;
 	var eraser:Int = 4;
+	var pan:Int = 5;
 
 }

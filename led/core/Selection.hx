@@ -1,6 +1,8 @@
 package led.core;
 
+
 import led.Rectangle;
+import led.utils.Log.*;
 
 
 class Selection {
@@ -13,6 +15,8 @@ class Selection {
 
 
 	public function new():Void {
+
+		_verbose('create new Selection');
 
 		active = false;
 		bounds = new Rectangle();

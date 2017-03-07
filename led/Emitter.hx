@@ -19,6 +19,7 @@ import led.utils.Log.log;
 
 // @:generic
 class Emitter<ET:Int> {
+	
 
 	@:noCompletion public var bindings : IntMap<HandlerList>;
 
@@ -37,7 +38,8 @@ class Emitter<ET:Int> {
 
 	} //new
 
-	@:noCompletion public function _emitter_destroy() {
+	public function destroy() {
+
 		while(_to_remove.length > 0) {
 			var _node = _to_remove.pop();
 			_node.event = null;
@@ -55,11 +57,12 @@ class Emitter<ET:Int> {
 		_to_remove = null;
 		connected = null;
 		bindings = null;
+
 	}
 
 		/** Emit a named event */
 	// @:generic
-	@:noCompletion public function emit<T>( event:ET, ?data:T #if emitter_pos, ?pos:haxe.PosInfos #end ) {
+	public function emit<T>( event:ET, ?data:T #if emitter_pos, ?pos:haxe.PosInfos #end ) {
 
 		if(bindings == null) return;
 
@@ -85,7 +88,7 @@ class Emitter<ET:Int> {
 
 		/** connect a named event to a handler */
 	// @:generic
-	@:noCompletion public function on<T>(event:ET, handler: T->Void #if emitter_pos, ?pos:haxe.PosInfos #end ) {
+	public function on<T>(event:ET, handler: T->Void #if emitter_pos, ?pos:haxe.PosInfos #end ) {
 
 		if(bindings == null) return;
 
@@ -110,7 +113,7 @@ class Emitter<ET:Int> {
 
 		/** disconnect a named event and handler. returns true on success, or false if event or handler not found */
 	// @:generic
-	@:noCompletion public function off<T>(event:ET, handler: T->Void #if emitter_pos, ?pos:haxe.PosInfos #end ) : Bool {
+	public function off<T>(event:ET, handler: T->Void #if emitter_pos, ?pos:haxe.PosInfos #end ) : Bool {
 
 		if(bindings == null) return false;
 
@@ -195,3 +198,4 @@ class Emitter<ET:Int> {
 	} //_check
 
 } //Emitter
+

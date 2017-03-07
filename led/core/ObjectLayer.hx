@@ -19,6 +19,8 @@ class ObjectLayer extends Layer {
 
 		options.type = LayerType.object;
 		
+		_verbose('create new ObjectLayer with options $options');
+
 		super(options);
 
 		if(options.json != null) {
@@ -33,12 +35,16 @@ class ObjectLayer extends Layer {
 
 	public function add_object(_obj:GameObject) {
 
+		_debug('calling add object on $name / $_obj object');
+
 		objects.push(_obj);
 		parent.emit(LevelEvent.layer_object_added, { layer : this, object: _obj });
 
 	}
 
 	public function remove_object(_obj:GameObject) {
+
+		_debug('calling remove object on $name / $_obj object');
 
 		if(objects.remove(_obj)){
 			parent.emit(LevelEvent.layer_object_added, { layer : this, object: _obj });
@@ -48,6 +54,8 @@ class ObjectLayer extends Layer {
 
 	override function empty() {
 
+		_debug('calling empty on $name');
+
 		for (o in objects) {
 			remove_object(o);
 		}
@@ -55,6 +63,8 @@ class ObjectLayer extends Layer {
 	}
 
 	override function destroy() {
+
+		_debug('calling destroy on $name');
 
 		super.destroy();
 
@@ -67,6 +77,8 @@ class ObjectLayer extends Layer {
 
 	override function to_json():LayerData {
 
+		_debug('calling to_json on $name');
+		
 		var d:ObjectLayerData = cast super.to_json();
 		d.objects = [];
 
@@ -75,6 +87,30 @@ class ObjectLayer extends Layer {
 		}
 
 		return d;
+
+	}
+
+	override function set_visible(value:Bool):Bool {
+
+		super.set_visible(value);
+
+		for (o in objects) {
+			o.visible = value;
+		}
+
+		return visible;
+
+	}
+
+	override function set_opacity(value:Float):Float {
+		
+		super.set_opacity(value);
+
+		for (o in objects) {
+			o.opacity = value;
+		}
+		
+		return opacity;
 
 	}
 

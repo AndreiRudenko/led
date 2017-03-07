@@ -3,6 +3,7 @@ package led;
 
 import led.core.Level;
 import led.core.Tools;
+import led.utils.Log.*;
 
 /* Editor */
 class Editor {
@@ -15,9 +16,12 @@ class Editor {
 
 	public function new() {
 
+        _verbose('create new editor');
 	}
 
 	public function init():Void {
+
+        _debug('calling init on editor');
 
 		emitter = new Emitter();
 		tools = new Tools();
@@ -28,31 +32,40 @@ class Editor {
 
 	public function destroy() {
 
+        _debug('calling destroy on editor');
+
 		if(level != null) {
 			level.destroy();
 			level = null;
 		}
 
 		tools.destroy();
-		emitter._emitter_destroy();
+		emitter.destroy();
 
+		tools = null;
 		emitter = null;
 
 	}
 	
 	public inline function on<T>(event:EditorEvent, handler:T->Void ) {
 
+        _verbose('calling emit on / on editor / $event event');
+
 		emitter.on(event, handler);
 
 	}
 
 	public inline function off<T>(event:EditorEvent, handler:T->Void ) {
+		
+        _verbose('calling emit off / on editor / $event');
 
 		return emitter.off(event, handler);
 
 	}
 
 	public inline function emit<T>(event:EditorEvent, ?data:T) {
+
+        _verboser('calling emit / on editor / $event / $data data');
 
 		return emitter.emit(event, data);
 

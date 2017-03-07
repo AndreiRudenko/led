@@ -18,13 +18,18 @@ class Tools {
 
 	public function new() {
 
+		_verbose('create new tools');
+
 		tools_map = new Map();
 
 	}
 
 	public function destroy() {
 			
+		_debug('calling destroy on tools');
+
 		for (t in tools_map) {
+			_debug('calling ondestroy on ${t.name} tool');
 			t.ondestroy();
 		}
 
@@ -33,6 +38,8 @@ class Tools {
 	}
 
 	public function set(_type:ToolType) {
+
+		_debug('calling set tool on tools / $_type type');
 
 		var t:Tool = tools_map.get(_type);
 
@@ -58,6 +65,8 @@ class Tools {
 
 	function update(dt:Float) {
 
+		_verboser('calling update on tools');
+
 		if(current_tool != null) {
 			current_tool.update(dt);
 		}
@@ -65,6 +74,8 @@ class Tools {
 	}
 
 	// function onmousemove(e:MouseEvent) {
+
+	// _verboser('calling onmousemove on tools');
 
 	// 	if(current_tool != null) {
 	// 		current_tool.onmousemove(e);
@@ -74,6 +85,8 @@ class Tools {
 
 	// function onmouseup(e:MouseEvent) {
 
+	// _verbose('calling onmouseup on tools');
+
 	// 	if(current_tool != null) {
 	// 		current_tool.onmouseup(e);
 	// 	}
@@ -82,13 +95,37 @@ class Tools {
 
 	// function onmousedown(e:MouseEvent) {
 
+	// _verbose('calling onmousedown on tools');
+
 	// 	if(current_tool != null) {
 	// 		current_tool.onmousedown(e);
 	// 	}
 		
 	// }
 
+	// function onkeydown(e:KeyEvent) {
+
+	// _verbose('calling onkeydown on tools');
+
+	// 	if(current_tool != null) {
+	// 		current_tool.onkeydown(e);
+	// 	}
+
+	// }
+
+	// function onkeyup(e:KeyEvent) {
+		
+		// _verbose('calling onkeyup on tools');
+
+	// 	if(current_tool != null) {
+	// 		current_tool.onkeyup(e);
+	// 	}
+
+	// }
+
 	function spacepressed(value:Bool) {
+
+		_verbose('calling spacepressed on tools');
 
 		if(current_tool != null) {
 			current_tool.spacepressed(value);
@@ -98,6 +135,8 @@ class Tools {
 
 	function altpressed(value:Bool) {
 
+		_verbose('calling altpressed on tools');
+
 		if(current_tool != null) {
 			current_tool.altpressed(value);
 		}
@@ -106,6 +145,8 @@ class Tools {
 
 	function shiftpressed(value:Bool) {
 
+		_verbose('calling shiftpressed on tools');
+
 		if(current_tool != null) {
 			current_tool.shiftpressed(value);
 		}
@@ -113,6 +154,8 @@ class Tools {
 	}
 
 	function ctrlpressed(value:Bool) {
+
+		_verbose('calling ctrlpressed on tools');
 
 		if(current_tool != null) {
 			current_tool.ctrlpressed(value);

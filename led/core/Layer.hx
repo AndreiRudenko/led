@@ -38,6 +38,8 @@ class Layer {
 
 	public function new(options:LayerOptions) {
 
+		_verbose('create new layer with options ' + options);
+
 		parent = options.parent;
 
 		if(options.json != null) {
@@ -101,6 +103,8 @@ class Layer {
 
 	public function destroy() {
 
+		_debug('calling destroy on $name');
+
 		parent.emit(LevelEvent.layer_destroy, this);
 		
 		name = null;
@@ -115,6 +119,8 @@ class Layer {
 	public function empty() {}
 
 	public function to_json():LayerData {
+
+		_debug('calling to_json on $name');
 
 		return {
 			name : name,
@@ -133,11 +139,17 @@ class Layer {
 
 	function set_name(value:String):String {
 
+		_verbose('set layer $name name to $value');
+		parent.emit(LevelEvent.layer_name_changed, {layer : this, value : value});
+
 		return name = value;
 
 	}
 
 	function set_visible(value:Bool):Bool {
+
+		_verbose('set layer $name visible to $value');
+		parent.emit(LevelEvent.layer_visible, {layer : this, value : value});
 
 		return visible = value;
 
@@ -145,6 +157,9 @@ class Layer {
 
 	function set_opacity(value:Float):Float {
 
+		_verbose('set layer $name opacity to $value');
+		parent.emit(LevelEvent.layer_opacity, {layer : this, value : value});
+		
 		return opacity = value;
 
 	}
